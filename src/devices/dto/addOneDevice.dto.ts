@@ -1,16 +1,23 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class addOneDeviceDto {
+export class AddOneDeviceDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+  status: string;
 
   @IsString()
   @IsNotEmpty()
-  body: string;
+  user: string;
 
   @IsString()
   @IsNotEmpty()
-  author: string;
+  location: string;
 
+  @IsString()
+  @IsNotEmpty()
+  blockInfo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  dockerInfo: string;
 }

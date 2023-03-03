@@ -8,6 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { DevicesService } from './devices.service';
+import { AddOneDeviceDto } from './dto/AddOneDevice.dto';
+import { GetOneDeviceDto } from './dto/GetOneDevice.dto';
+import { UpdateOneDevice } from './dto/UpdateOneDevice.dto';
 
 @Controller('devices')
 export class DevicesController {
@@ -16,7 +19,7 @@ export class DevicesController {
   // 增加一个device
   @Post('addOneDevice')
   async addOneDevice(
-    // @Body() addBlogDto: AddBlogDto,
+    @Body() addOneDeviceDto: AddOneDeviceDto,
     @Body('status') status: string,
     @Body('user') user: string,
     @Body('location') location: string,
@@ -24,16 +27,9 @@ export class DevicesController {
     @Body('dockerInfo') dockerInfo: string,
   ) {
     const generatedId = await this.deviceService.createOneDevice(
-      status,
-      user,
-      location,
-      blockInfo,
-      dockerInfo,
+      addOneDeviceDto,
     );
 
-    // console.log(generatedId);
-    // console.log(typeof generatedId);
-    // return { id: generatedId };
     return generatedId;
   }
 
@@ -47,36 +43,27 @@ export class DevicesController {
 
   // 获取一个device
   @Get(':deviceId')
-  async getOneDevice(@Param('deviceId') deviceId: string) {
-    const res = await this.deviceService.getOneDevice(deviceId);
+  async getOneDevice(@Param() getOneDeviceDto: GetOneDeviceDto) {
+    const res = await this.deviceService.getOneDevice(getOneDeviceDto);
     return res;
   }
 
   // 更新一个device
   @Patch(':deviceId')
   async updateOneDevice(
-    @Param('deviceId') deviceId: string,
-    @Body('status') status: string,
-    @Body('user') user: string,
-    @Body('location') location: string,
-    @Body('blockInfo') blockInfo: string,
-    @Body('dockerInfo') dockerInfo: string,
+    @Param() getOneDeviceDto: GetOneDeviceDto,
+    @Body() updateOneDeviceDto: UpdateOneDevice,
   ) {
-    await this.deviceService.updateDevice(
-      deviceId,
-      status,
-      user,
-      location,
-      blockInfo,
-      dockerInfo,
+    await this.deviceService.updateOneDevice(
+      getOneDeviceDto,
+      updateOneDeviceDto,
     );
   }
 
   // 删除一个device
   @Delete(':deviceId')
-  async removeDevice(@Param('deviceId') deviceId: string) {
-    // console.log(deviceId);
-    await this.deviceService.deleteOneDevice(deviceId);
+  async removeDevice(@Param() getOneDeviceDto: GetOneDeviceDto) {
+    await this.deviceService.deleteOneDevice(getOneDeviceDto);
     return null;
   }
 }

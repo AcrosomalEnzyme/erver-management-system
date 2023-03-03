@@ -2,6 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model, Types } from 'mongoose';
 import { Device, DeviceDocument } from './device.schema';
+import { AddOneDeviceDto } from './dto/AddOneDevice.dto';
+import { GetOneDeviceDto } from './dto/GetOneDevice.dto';
+import { UpdateOneDevice } from './dto/UpdateOneDevice.dto';
 
 @Injectable()
 export class DevicesService {
@@ -10,15 +13,13 @@ export class DevicesService {
   ) {}
 
   // 增加一个device
-  async createOneDevice(
-    status: string,
-    user: string,
-    location: string,
-    blockInfo: string,
-    dockerInfo: string,
-  ) {
-    // const deviceId = Math.random().toString();
-    // const time = new Date().toString();
+  async createOneDevice(addOneDeviceDto: AddOneDeviceDto) {
+    const status = addOneDeviceDto.status;
+    const user = addOneDeviceDto.user;
+    const location = addOneDeviceDto.location;
+    const blockInfo = addOneDeviceDto.blockInfo;
+    const dockerInfo = addOneDeviceDto.blockInfo;
+
     const newDevice = new this.deviceModel({
       status,
       user,
@@ -26,12 +27,9 @@ export class DevicesService {
       blockInfo,
       dockerInfo,
     });
-    const result = await newDevice.save();
+    const res = await newDevice.save();
 
-    // console.log(result._id);
-    return result._id;
-    // return deviceId;
-    // return title;
+    return res._id;
   }
 
   // 获取全部device
@@ -62,22 +60,23 @@ export class DevicesService {
   }
 
   // 获取一个device
-  async getOneDevice(deviceId: string) {
-    console.log(deviceId);
-    const device = await this.findOneDevice(deviceId);
+  async getOneDevice(getOneDeviceDto: GetOneDeviceDto) {
+    const device = await this.findOneDevice(getOneDeviceDto.deviceId);
     return device;
   }
 
   // 更新一个device
-  async updateDevice(
-    deviceId: string,
-    status: string,
-    user: string,
-    location: string,
-    blockInfo: string,
-    dockerInfo: string,
+  async updateOneDevice(
+    getOneDeviceDto: GetOneDeviceDto,
+    updateOneDeviceDto: UpdateOneDevice,
   ) {
-    // const device = await this.findOneDevice(deviceId);
+    const deviceId = getOneDeviceDto.deviceId;
+    const status = updateOneDeviceDto.status;
+    const user = updateOneDeviceDto.user;
+    const location = updateOneDeviceDto.location;
+    const blockInfo = updateOneDeviceDto.blockInfo;
+    const dockerInfo = updateOneDeviceDto.blockInfo;
+
     const res = await this.deviceModel
       .updateOne(
         { _id: deviceId },
@@ -101,8 +100,8 @@ export class DevicesService {
   }
 
   // 删除一个device
-  async deleteOneDevice(deviceId: string) {
-    const res = await this.deviceModel.findByIdAndDelete(deviceId).exec();
+  async deleteOneDevice(getOneDeviceDto: GetOneDeviceDto) {
+    const res = await this.deviceModel.findByIdAndDelete(getOneDeviceDto.deviceId).exec();
 
     if (!res) {
       console.log('here');
