@@ -1,19 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { now, HydratedDocument } from 'mongoose';
 
-export type DeviceDocument = HydratedDocument<Device>;
+export type LocationDocument = HydratedDocument<Location>;
 
 @Schema({timestamps:true})
-export class Device {
+export class Location {
   // 状态、默认ID、区块信息、Docker信息、上次发送状态的时间
   @Prop({ required: true })
-  name: string;
+  status: string;
 
   @Prop({ required: true })
-  password: string;
+  user: string;
 
-  @Prop({ required: true })
-  location: string;
+  // @Prop({ required: true })
+  // location: string;
 
   @Prop({ required: true })
   blockInfo: string;
@@ -28,4 +28,4 @@ export class Device {
   updatedAt: Date;
 }
 
-export const DeviceSchema = SchemaFactory.createForClass(Device);
+export const LocationSchema = SchemaFactory.createForClass(Location);

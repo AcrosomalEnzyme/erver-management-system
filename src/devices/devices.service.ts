@@ -15,14 +15,14 @@ export class DevicesService {
   // 增加一个device
   async createOneDevice(addOneDeviceDto: AddOneDeviceDto) {
     const status = addOneDeviceDto.status;
-    const user = addOneDeviceDto.user;
+    const userId = addOneDeviceDto.userId;
     // const location = addOneDeviceDto.location;
     const blockInfo = addOneDeviceDto.blockInfo;
     const dockerInfo = addOneDeviceDto.blockInfo;
 
     const newDevice = new this.deviceModel({
       status,
-      user,
+      userId,
       // location,
       blockInfo,
       dockerInfo,
@@ -72,7 +72,7 @@ export class DevicesService {
   ) {
     const deviceId = getOneDeviceDto.deviceId;
     const status = updateOneDeviceDto.status;
-    const user = updateOneDeviceDto.user;
+    const userId = updateOneDeviceDto.userId;
     // const location = updateOneDeviceDto.location;
     const blockInfo = updateOneDeviceDto.blockInfo;
     const dockerInfo = updateOneDeviceDto.blockInfo;
@@ -82,7 +82,7 @@ export class DevicesService {
         { _id: deviceId },
         {
           status: status,
-          user: user,
+          userId: userId,
           // location: location,
           blockInfo: blockInfo,
           dockerInfo: dockerInfo,
@@ -101,10 +101,12 @@ export class DevicesService {
 
   // 删除一个device
   async deleteOneDevice(getOneDeviceDto: GetOneDeviceDto) {
-    const res = await this.deviceModel.findByIdAndDelete(getOneDeviceDto.deviceId).exec();
+    const res = await this.deviceModel
+      .findByIdAndDelete(getOneDeviceDto.deviceId)
+      .exec();
 
     if (!res) {
-      console.log('here');
+      // console.log('here');
       throw new NotFoundException(
         'Could not find device.(valided ID form but not find).',
       );

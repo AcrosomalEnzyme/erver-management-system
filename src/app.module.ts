@@ -6,6 +6,7 @@ import { LocationsModule } from './locations/locations.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DevicesModule } from './devices/devices.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DevicesModule } from './devices/devices.module';
     DevicesModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

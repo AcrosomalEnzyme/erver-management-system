@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class AddOneDeviceDto {
   @IsString()
@@ -7,7 +7,8 @@ export class AddOneDeviceDto {
 
   @IsString()
   @IsNotEmpty()
-  user: string;
+  @Length(24, 24, { message: 'ID长度应该为24' })
+  userId: string;
 
   // @IsString()
   // @IsNotEmpty()

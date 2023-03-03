@@ -20,11 +20,6 @@ export class DevicesController {
   @Post('addOneDevice')
   async addOneDevice(
     @Body() addOneDeviceDto: AddOneDeviceDto,
-    @Body('status') status: string,
-    @Body('user') user: string,
-    @Body('location') location: string,
-    @Body('blockInfo') blockInfo: string,
-    @Body('dockerInfo') dockerInfo: string,
   ) {
     const generatedId = await this.deviceService.createOneDevice(
       addOneDeviceDto,
