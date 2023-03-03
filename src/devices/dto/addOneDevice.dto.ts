@@ -9,9 +9,9 @@ export class AddOneDeviceDto {
   @IsNotEmpty()
   user: string;
 
-  @IsString()
-  @IsNotEmpty()
-  location: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // location: string;
 
   @IsString()
   @IsNotEmpty()

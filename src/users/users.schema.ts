@@ -7,13 +7,13 @@ export type DeviceDocument = HydratedDocument<Device>;
 export class Device {
   // 状态、默认ID、区块信息、Docker信息、上次发送状态的时间
   @Prop({ required: true })
-  status: string;
+  name: string;
 
   @Prop({ required: true })
-  user: string;
+  password: string;
 
-  // @Prop({ required: true })
-  // location: string;
+  @Prop({ required: true })
+  location: string;
 
   @Prop({ required: true })
   blockInfo: string;

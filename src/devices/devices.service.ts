@@ -16,14 +16,14 @@ export class DevicesService {
   async createOneDevice(addOneDeviceDto: AddOneDeviceDto) {
     const status = addOneDeviceDto.status;
     const user = addOneDeviceDto.user;
-    const location = addOneDeviceDto.location;
+    // const location = addOneDeviceDto.location;
     const blockInfo = addOneDeviceDto.blockInfo;
     const dockerInfo = addOneDeviceDto.blockInfo;
 
     const newDevice = new this.deviceModel({
       status,
       user,
-      location,
+      // location,
       blockInfo,
       dockerInfo,
     });
@@ -54,8 +54,8 @@ export class DevicesService {
         'Could not find device.(valided ID form but not find).',
       );
     }
-    console.log(device);
-    console.log(typeof device);
+    // console.log(device);
+    // console.log(typeof device);
     return device;
   }
 
@@ -73,7 +73,7 @@ export class DevicesService {
     const deviceId = getOneDeviceDto.deviceId;
     const status = updateOneDeviceDto.status;
     const user = updateOneDeviceDto.user;
-    const location = updateOneDeviceDto.location;
+    // const location = updateOneDeviceDto.location;
     const blockInfo = updateOneDeviceDto.blockInfo;
     const dockerInfo = updateOneDeviceDto.blockInfo;
 
@@ -83,7 +83,7 @@ export class DevicesService {
         {
           status: status,
           user: user,
-          location: location,
+          // location: location,
           blockInfo: blockInfo,
           dockerInfo: dockerInfo,
         },
