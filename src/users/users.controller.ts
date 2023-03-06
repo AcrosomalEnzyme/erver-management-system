@@ -20,11 +20,11 @@ import {
     @Post('addOneUser')
     async addOneUser(
       @Body() addOneUserDto: AddOneUserDto,
-      @Body('status') status: string,
-      @Body('user') user: string,
-      @Body('location') location: string,
-      @Body('blockInfo') blockInfo: string,
-      @Body('dockerInfo') dockerInfo: string,
+      // @Body('status') status: string,
+      // @Body('user') user: string,
+      // @Body('location') location: string,
+      // @Body('blockInfo') blockInfo: string,
+      // @Body('dockerInfo') dockerInfo: string,
     ) {
       const generatedId = await this.userService.createOneUser(
         addOneUserDto,
