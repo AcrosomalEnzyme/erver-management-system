@@ -11,6 +11,7 @@ import { LocationsService } from './locations.service';
 import { AddOneLocationDto } from './dto/AddOneLocation.dto';
 import { GetOneLocationDto } from './dto/GetOneLocation.dto';
 import { UpdateOneLocation } from './dto/UpdateOneLocation.dto';
+import { Public } from 'src/auth/auth.controller';
 
 @Controller('locations')
 export class LocationsController {
@@ -27,6 +28,7 @@ export class LocationsController {
   }
 
   // 获取全部location
+  // @Public()
   @Get('allLocation')
   async getAllLocations() {
     const res = await this.locationService.getAllLocations();
