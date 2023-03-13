@@ -13,7 +13,7 @@ export class DevicesService {
   ) {}
 
   // 增加一个device
-  async createOneDevice(addOneDeviceDto: AddOneDeviceDto) {
+  async addOneDevice(addOneDeviceDto: AddOneDeviceDto) {
     const status = addOneDeviceDto.status;
     const userId = addOneDeviceDto.userId;
     // const location = addOneDeviceDto.location;
@@ -54,8 +54,6 @@ export class DevicesService {
         'Could not find device.(valided ID form but not find).',
       );
     }
-    // console.log(device);
-    // console.log(typeof device);
     return device;
   }
 
@@ -83,7 +81,6 @@ export class DevicesService {
         {
           status: status,
           userId: userId,
-          // location: location,
           blockInfo: blockInfo,
           dockerInfo: dockerInfo,
         },
@@ -92,7 +89,7 @@ export class DevicesService {
 
     if (!res.matchedCount) {
       throw new NotFoundException(
-        'Could not find device.(valided ID form but not find).',
+        'Could not find device. (valided ID form but not find).',
       );
     }
 
@@ -101,6 +98,17 @@ export class DevicesService {
 
   // 删除一个device
   async deleteOneDevice(getOneDeviceDto: GetOneDeviceDto) {
+    // try {
+    //   const res = await this.deviceModel
+    //     .findByIdAndDelete(getOneDeviceDto.deviceId)
+    //     .exec();
+    // } catch (error) {
+    //   throw new NotFoundException('Could not find device.(invalided ID form).');
+    // }
+    if (getOneDeviceDto.deviceId.length != 24) {
+      throw new NotFoundException"Could not find device.(invalided ID form)."');
+    }
+
     const res = await this.deviceModel
       .findByIdAndDelete(getOneDeviceDto.deviceId)
       .exec();
@@ -108,7 +116,7 @@ export class DevicesService {
     if (!res) {
       // console.log('here');
       throw new NotFoundException(
-        'Could not find device.(valided ID form but not find).',
+       "Could not find device.(valided ID form but not find).",
       );
     }
 

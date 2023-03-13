@@ -3,14 +3,14 @@ import { now, HydratedDocument } from 'mongoose';
 
 export type DeviceDocument = HydratedDocument<Device>;
 
-@Schema({timestamps:true})
+@Schema({ timestamps: true })
 export class Device {
   // 状态、默认ID、区块信息、Docker信息、上次发送状态的时间
   @Prop({ required: true })
   status: string;
 
   @Prop({ required: true })
-  user: string;
+  userId: string;
 
   // @Prop({ required: true })
   // location: string;

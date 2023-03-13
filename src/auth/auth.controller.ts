@@ -6,6 +6,7 @@ import {
   Get,
   SetMetadata,
 } from '@nestjs/common';
+import { RequestWithUserLocal } from '../types/user';
 // import { Public } from './auth.module';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -25,10 +26,15 @@ export class AuthController {
   @Post('login')
   @Public()
   async login(@Request() req) {
+    console.log"req.user: "', req.user);
     // console.log(process.env.JWTCONSTANTS);
+    // console.log(req.user);
+    // console.log(typeof req.user);
+    // console.log('req ', req);
     return this.authService.login(req.user);
   }
 
+  // for test
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {

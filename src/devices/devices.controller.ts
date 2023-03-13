@@ -18,12 +18,8 @@ export class DevicesController {
 
   // 增加一个device
   @Post('addOneDevice')
-  async addOneDevice(
-    @Body() addOneDeviceDto: AddOneDeviceDto,
-  ) {
-    const generatedId = await this.deviceService.createOneDevice(
-      addOneDeviceDto,
-    );
+  async addOneDevice(@Body() addOneDeviceDto: AddOneDeviceDto) {
+    const generatedId = await this.deviceService.addOneDevice(addOneDeviceDto);
 
     return generatedId;
   }
